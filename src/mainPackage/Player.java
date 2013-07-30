@@ -4,37 +4,44 @@ import java.util.*;
 import java.util.Random;
 
 public class Player {
-
-	Card MyBid;
-	float score;
-	ArrayList MyCards;
 	
-	public Player(ArrayList CardList) {
-		this.MyCards = new ArrayList();
-		Collections.copy(this.MyCards, CardList);
-		this.score = 0.0;
-		this.MyBid = new Card();
+	Card myBid;
+	float score;
+	ArrayList<Card> myCards;
+	
+	public Player(ArrayList<Card> CardList) {
+		this.myCards = new ArrayList<Card>();
+		Collections.copy(this.myCards, CardList);
+		this.score = 0.0f;
+		this.myBid = new Card();
 	}
 	
 	public Card highestCard() {
-		return this.MyCards.get(this.Mycards.size()-1);
+		return (Card) this.myCards.get(this.myCards.size()-1);
 	}
 	
 	public Card lowestCard() {
-		return this.MyCards.get(0);
+		return (Card) this.myCards.get(0);
 	}
 	
-	public randomCard() {
+	public Card randomCard() {
 		Random r = new Random();
-		return this.MyCards.get(r.nextInt(this.MyCards.size()));
+		return (Card) this.myCards.get(r.nextInt(this.myCards.size()));
 	}
 	
 	public void updateScore(float val) {
 		this.score += val;
 	}
 	
-	public void getScore() {
+	public float getScore() {
 		return this.score;
 	}
 	
+	public Card getMyBid() {
+		return this.myBid;
+	}
+	
+	public void setMyBid(Card c) {
+		this.myBid = c; 
+	}
 }

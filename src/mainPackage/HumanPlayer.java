@@ -4,15 +4,14 @@ import java.util.*;
 
 public class HumanPlayer extends Player {
 	
-	public HumanPlayer(ArrayList CardList) {
-		this.MyCards = new ArrayList();
-		Collections.copy(this.MyCards, CardList);
-		this.sortMyCards();
-		this.score = 0.0;
-		this.MyBid = new Card();
+	public HumanPlayer(ArrayList<Card> CardList) {
+		super(CardList);
 	}
 	
 	public Card nextBid() {
-		return this.highestCard();
+		Card next = this.randomCard();
+		this.myCards.remove(next);
+		this.setMyBid(next);
+		return next;
 	}
 }
