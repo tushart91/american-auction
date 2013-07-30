@@ -33,45 +33,53 @@ public class Card {
 	}
 	
 	public String toString() {
-	    String card = "";
-	    switch (this.faceValue) {
-	      case 1:
-	        card += "Ace of ";
-	        break; 
-	      case 11:
-	        card += "Jack of "; 
-	        break;
-	      case 12:
-	        card += "Queen of "; 
-	        break;
-	      case 13:
-	        card += "King of "; 
-	        break;
-	      default:
-	        card += this.faceValue + " of ";  //all digits
-	        break;
-	    }
-	    switch (this.suit) {
-	      	case 'H':
-	      	case 'h':
-	      		card += "Hearts";
+	     return faceValueToString() + " of " + suitToString();
+	}
+	
+	public String faceValueToString(){
+		String value = "";
+		switch (this.faceValue) {
+	      	case 1:
+	      		value += "Ace";
+	      		break; 
+	      	case 11:
+	      		value += "Jack"; 
 	      		break;
-	      	case 'D':
-	      	case 'd':
-	      		card += "Diamonds";
+	      	case 12:
+	      		value += "Queen"; 
 	      		break;
-	      	case 'C':
-	      	case 'c':
-	      		card += "Clubs"; 
-	      		break;
-	      	case 'S':
-	      	case 's':
-	      		card += "Spades";
+	      	case 13:
+	      		value += "King"; 
 	      		break;
 	      	default:
+	      		value += this.faceValue;  
 	      		break;
 	    }
-	  	return card;
+	  	return value;
+	}
+	
+	public String suitToString(){
+		String suit = "";
+		switch (this.suit) {
+      		case 'H':
+      		case 'h':
+      			suit += "Hearts";
+      			break;
+      		case 'D':
+      		case 'd':
+      			suit += "Diamonds";
+      			break;
+      		case 'C':
+      		case 'c':
+      			suit += "Clubs"; 
+      			break;
+      		case 'S':
+      		case 's':
+      			suit += "Spades";
+      			break;
+      		default:
+      			break;
+		}
+		return suit;
 	}
 }
-
