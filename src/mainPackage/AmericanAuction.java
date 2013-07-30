@@ -14,10 +14,10 @@ public class AmericanAuction {
 		this.numofPlayers = numofPlayers;
 		auctionItem = null;
 
-		distributeCards(numofPlayers, auctionSuite);
+		distributeCardsToPlayers(numofPlayers, auctionSuite);
 	}
 
-	private void distributeCards(int numofPlayers, char auctionSuite) {
+	private void distributeCardsToPlayers(int numofPlayers, char auctionSuite) {
 
 		// Auction Cards
 		for (int i = 0; i < 13; i++) {
@@ -44,25 +44,25 @@ public class AmericanAuction {
 	}
 
 	public ArrayList<Card> PlayerBids() {
-		ArrayList<Card> playerBids = new ArrayList<Card>();
+		ArrayList<Card> listOfPlayerBids = new ArrayList<Card>();
 		for (int i = 0; i < players.size(); i++)
-			playerBids.add(players.get(i).getMyBid());
+			listOfPlayerBids.add(players.get(i).getMyBid());
 
-		return playerBids;
+		return listOfPlayerBids;
 	}
 
 	public ArrayList<Float> PlayerScores() {
-		ArrayList<Float> playerScores = new ArrayList<Float>();
+		ArrayList<Float> listOfPlayerScores = new ArrayList<Float>();
 		for (int i = 0; i < players.size(); i++)
-			playerScores.add(players.get(i).getScore());
+			listOfPlayerScores.add(players.get(i).getScore());
 
-		return playerScores;
+		return listOfPlayerScores;
 	}
 
 	private void updateScore(ArrayList<Integer> winnerIndex) {
 		for (int i = 0; i < winnerIndex.size(); i++) {
 			players.get(winnerIndex.get(i)).updateScore(
-					(getCardOnAuction().getValue() / winnerIndex.size()));
+					((float)getCardOnAuction().getValue() / winnerIndex.size()));
 		}
 	}
 
@@ -86,38 +86,26 @@ public class AmericanAuction {
 
 	public void playRound() {
 
-		nextAuctionCard();
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).nextBid();
 		}
-		System.out.print(getCardOnAuction() + " --> ");
-		System.out.println(PlayerBids());
 		updateScore(roundWinner());
-		System.out.println("Current scores: " + PlayerScores());
-	}
-
-	public ArrayList<Integer> playGame() {
-
-		for (int j = 0; j < 13; j++) {
-			playRound();
-		}
-		return gameWinner();
 	}
 
 	public ArrayList<Integer> gameWinner() {
 		float maxScore = players.get(0).getScore();
-		ArrayList<Integer> gameWinnerIndex = new ArrayList<Integer>();
-		gameWinnerIndex.add(0);
+		ArrayList<Integer> indexOfGameWinners = new ArrayList<Integer>();
+		indexOfGameWinners.add(0);
 		for (int i = 1; i < players.size(); i++) {
 			if (players.get(i).getScore() > maxScore) {
 				maxScore = players.get(i).getScore();
-				gameWinnerIndex.clear();
-				gameWinnerIndex.add(i);
+				indexOfGameWinners.clear();
+				indexOfGameWinners.add(i);
 			} else if (players.get(i).getScore() == maxScore) {
-				gameWinnerIndex.add(i);
+				indexOfGameWinners.add(i);
 			}
 		}
-		return gameWinnerIndex;
+		return indexOfGameWinners;
 	}
 
 	public Card getCardOnAuction() {
@@ -127,7 +115,17 @@ public class AmericanAuction {
 	public static void main(String[] args) {
 
 		AmericanAuction game = new AmericanAuction(3, 'D');
-		System.out.println(game.playGame());
+		for (int j = 0; j < 13; j++) {
+			game.nextAuctionCard();
+			System.out.println("Card on Auction: " + game.getCardOnAuction());
+			game.playRound();
+			System.out.println("Player Bids: " + game.PlayerBids());
+			System.out.println("Player Scores  : " + game.PlayerScores());
+			System.out.println();
+		}
+		ArrayList<Integer> winners = game.gameWinner();
+		for (int i = 0; i < winners.size(); i++)
+			System.out.println("Player" + winners.get(i));
 
 	}
 
