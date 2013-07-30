@@ -10,7 +10,7 @@ public class ComputerPlayer extends Player {
 	
 	public Card nextBid() {
 		Card next = this.randomCard();
-		this.myCards.remove(next);
+		this.removeFromList(next);
 		this.setMyBid(next);
 		return next;
 	}

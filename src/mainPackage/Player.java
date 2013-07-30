@@ -10,8 +10,7 @@ public class Player {
 	ArrayList<Card> myCards;
 	
 	public Player(ArrayList<Card> CardList) {
-		this.myCards = new ArrayList<Card>();
-		Collections.copy(this.myCards, CardList);
+		this.myCards = new ArrayList<Card>(CardList);
 		this.score = 0.0f;
 		this.myBid = new Card();
 	}
@@ -43,5 +42,13 @@ public class Player {
 	
 	public void setMyBid(Card c) {
 		this.myBid = c; 
+	}
+	
+	public void removeFromList(Card next) {
+		for (int i = 0; i < this.myCards.size(); i++)
+			if (this.myCards.get(i).getValue() == next.getValue()) {
+				this.myCards.remove(i);
+				break;
+			}	
 	}
 }
