@@ -67,6 +67,7 @@ public class AmericanAuction {
 	}
 
 	public ArrayList<Integer> roundWinner() {
+		
 		int maxBid = players.get(0).getMyBid().getValue();
 		ArrayList<Integer> winnerIndex = new ArrayList<Integer>();
 		winnerIndex.add(0);
@@ -80,7 +81,6 @@ public class AmericanAuction {
 				winnerIndex.add(i);
 			}
 		}
-		System.out.println("Winner Index: " + winnerIndex);
 		return winnerIndex;
 	}
 
@@ -93,6 +93,7 @@ public class AmericanAuction {
 	}
 
 	public ArrayList<Integer> gameWinner() {
+		
 		float maxScore = players.get(0).getScore();
 		ArrayList<Integer> indexOfGameWinners = new ArrayList<Integer>();
 		indexOfGameWinners.add(0);
