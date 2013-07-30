@@ -23,15 +23,19 @@ public class AmericanAuction {
 		for (int i = 0; i < 13; i++) {
 			cardsOnAuction.add(new Card(i + 1, auctionSuite));
 		}
-
+		
 		// Initialise Player with arraylist of cards
-		for (int i = 0; i < numofPlayers; i++) {
-			ArrayList<Card> playerCards = new ArrayList<Card>();
-			for (int j = 0; j < 13; j++) {
-				playerCards.add(new Card(j + 1, suit[i + 1]));
-			}
-			players.add(new Player(playerCards));
+		players.add(new HumanPlayer(SuiteCards(suit[1])));
+		for (int i = 1; i < numofPlayers; i++) 
+			players.add(new ComputerPlayer(SuiteCards(suit[i + 1])));
+	}
+	
+	private static ArrayList<Card> SuiteCards(char s) {
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		for (int j = 0; j < 13; j++) {
+			playerCards.add(new Card(j + 1, s));
 		}
+		return playerCards;
 	}
 
 	private Card nextAuctionCard() {
@@ -126,7 +130,7 @@ public class AmericanAuction {
 		}
 		ArrayList<Integer> winners = game.gameWinner();
 		for (int i = 0; i < winners.size(); i++)
-			System.out.println("Player" + winners.get(i));
+			System.out.println("Player " + winners.get(i) + " Wins!");
 
 	}
 
