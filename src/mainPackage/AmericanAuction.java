@@ -8,7 +8,7 @@ public class AmericanAuction {
 	ArrayList<Player> players = new ArrayList<Player>();
 	ArrayList<Card> cardsOnAuction = new ArrayList<Card>();
 	Card bidItem;
-	Character[] suit = { 'H', 'S', 'C' };
+	Character[] suit = { 'D', 'H', 'S', 'C'};
 
 	public AmericanAuction(int numofPlayers) {
 		this.numofPlayers = numofPlayers;
@@ -23,15 +23,10 @@ public class AmericanAuction {
 		for (int i = 0; i < numofPlayers; i++) {
 			ArrayList<Card> playerCards = new ArrayList<Card>();
 			for (int j = 0; j < 13; i++) {
-				playerCards.add(new Card(j + 1, suit[i]));
+				playerCards.add(new Card(j + 1, suit[i + 1]));
 			}
 			players.add(new Player(playerCards));
 		}
-
-	}
-
-	public Card getCardOnAuction() {
-		return bidItem;
 	}
 
 	private Card nextCard() {
@@ -82,6 +77,7 @@ public class AmericanAuction {
 				winnerIndex.add(i);
 			}
 		}
+		updateScore(winnerIndex);
 	}
 
 	public void playRound() {
@@ -112,6 +108,10 @@ public class AmericanAuction {
 			playRound();
 		}
 		return gameWinner();
+	}
+	
+	public Card getCardOnAuction() {
+		return bidItem;
 	}
 
 }
