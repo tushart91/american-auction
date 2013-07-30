@@ -35,9 +35,6 @@ public class Card {
 	public String toString() {
 	    String card = "";
 	    switch (this.faceValue) {
-	      case 0:
-	        card += "Joker of ";
-	        break; 
 	      case 1:
 	        card += "Ace of ";
 	        break; 
@@ -72,7 +69,6 @@ public class Card {
 	      		card += "Spades";
 	      		break;
 	      	default:
-	      		//add nothing (such as to "Joker")
 	      		break;
 	    }
 	  	return card;
