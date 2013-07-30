@@ -11,9 +11,10 @@ public class HumanPlayer extends Player {
 	
 	public Card nextBid() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		this.displayCards();
 		System.out.println("Enter Your Choice: ");
 		Card next = new Card(Integer.parseInt(br.readLine()), this.myCards.get(0).getSuit());
-		this.removeFromList(next);
+		this.removeFromMyCards(next);
 		this.setMyBid(next);
 		return next;
 	}

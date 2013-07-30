@@ -1,5 +1,5 @@
 package mainPackage;
-
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -7,12 +7,12 @@ public class AmericanAuction {
 	Integer numofPlayers;
 	ArrayList<Player> players = new ArrayList<Player>();
 	ArrayList<Card> cardsOnAuction = new ArrayList<Card>();
-	Card auctionItem;
+	Card auctionCard;
 	Character[] suit = { 'D', 'H', 'S', 'C' };
 
 	public AmericanAuction(int numofPlayers, char auctionSuite) {
 		this.numofPlayers = numofPlayers;
-		auctionItem = null;
+		auctionCard = null;
 
 		distributeCardsToPlayers(numofPlayers, auctionSuite);
 	}
@@ -42,9 +42,9 @@ public class AmericanAuction {
 
 		Random randomGenerator = new Random();
 		int index = randomGenerator.nextInt(cardsOnAuction.size());
-		auctionItem = cardsOnAuction.get(index);
+		auctionCard = cardsOnAuction.get(index);
 		cardsOnAuction.remove(index);
-		return auctionItem;
+		return auctionCard;
 	}
 
 	public ArrayList<Card> PlayerBids() {
@@ -88,7 +88,7 @@ public class AmericanAuction {
 		return winnerIndex;
 	}
 
-	public void playRound() {
+	public void playRound() throws IOException {
 
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).nextBid();
@@ -114,10 +114,10 @@ public class AmericanAuction {
 	}
 
 	public Card getCardOnAuction() {
-		return auctionItem;
+		return auctionCard;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		AmericanAuction game = new AmericanAuction(3, 'D');
 		for (int j = 0; j < 13; j++) {
@@ -130,7 +130,7 @@ public class AmericanAuction {
 		}
 		ArrayList<Integer> winners = game.gameWinner();
 		for (int i = 0; i < winners.size(); i++)
-			System.out.println("Player " + winners.get(i) + " Wins!");
+			System.out.println("Player " + (winners.get(i)+1) + " Wins!");
 
 	}
 

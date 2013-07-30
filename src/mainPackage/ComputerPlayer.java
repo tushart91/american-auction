@@ -1,6 +1,7 @@
 package mainPackage;
 
 import java.util.*;
+import java.io.*;
 
 public class ComputerPlayer extends Player {
 	
@@ -8,9 +9,9 @@ public class ComputerPlayer extends Player {
 		super(CardList);
 	}
 	
-	public Card nextBid() {
+	public Card nextBid() throws IOException {
 		Card next = this.randomCard();
-		this.removeFromList(next);
+		this.removeFromMyCards(next);
 		this.setMyBid(next);
 		return next;
 	}

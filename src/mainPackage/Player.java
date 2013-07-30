@@ -1,6 +1,7 @@
 package mainPackage;
 
 import java.util.*;
+import java.io.*;
 
 public class Player {
 
@@ -43,7 +44,7 @@ public class Player {
 		this.myBid = c;
 	}
 
-	public void removeFromList(Card next) {
+	public void removeFromMyCards(Card next) {
 		for (int i = 0; i < this.myCards.size(); i++)
 			if (this.myCards.get(i).getValue() == next.getValue()) {
 				this.myCards.remove(i);
@@ -51,9 +52,9 @@ public class Player {
 			}
 	}
 
-	public Card nextBid() {
+	public Card nextBid() throws IOException {
 		Card next = this.randomCard();
-		this.removeFromList(next);
+		this.removeFromMyCards(next);
 		this.setMyBid(next);
 		return next;
 	}
